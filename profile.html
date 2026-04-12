@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pro Profile</title>
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial;
+}
+
+body{
+  background:#f5f7fb;
+  display:flex;
+  justify-content:center;
+  padding:40px;
+}
+
+/* CARD */
+.profile-card{
+  width:360px;
+  background:#fff;
+  border-radius:25px;
+  padding:25px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.1);
+  text-align:center;
+  position:relative;
+}
+
+/* LOGOUT */
+.logout{
+  position:absolute;
+  top:15px;
+  right:15px;
+  background:#ef4444;
+  color:#fff;
+  border:none;
+  padding:8px 12px;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+/* AVATAR WRAPPER */
+.main-wrapper{
+  width:180px;
+  height:180px;
+  margin:0 auto;
+  position:relative;
+}
+
+.main-wrapper-inside img{
+  width:180px;
+  height:180px;
+  border-radius:50%;
+  object-fit:cover;
+  border:4px solid #4f46e5;
+}
+
+/* MAIN BUTTON */
+.button{
+  width:55px;
+  height:55px;
+  border-radius:50%;
+  background:#4f46e5;
+  position:absolute;
+  bottom:0;
+  right:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  z-index:10;
+}
+
+.button .material-icons{
+  color:#fff;
+  transition:.3s;
+}
+
+.button.animation .material-icons{
+  transform:rotate(45deg);
+}
+
+/* MENU */
+.button-wrapper{
+  width:180px;
+  height:180px;
+  position:absolute;
+  top:0;
+  left:0;
+  transition:.4s;
+}
+
+.button-wrapper.first.animation{transform:rotate(-40deg);}
+.button-wrapper.second.animation{transform:rotate(-75deg);}
+.button-wrapper.third.animation{transform:rotate(-110deg);}
+
+/* ICON BUTTONS */
+.button-inside{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  background:#4f46e5;
+  position:absolute;
+  bottom:5px;
+  right:5px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+}
+
+.button-inside .material-icons{
+  font-size:18px;
+  color:#fff;
+}
+
+.button-inside.first{transform:rotate(40deg);}
+.button-inside.second{transform:rotate(75deg);}
+.button-inside.third{transform:rotate(110deg);}
+
+/* NAME */
+.name{
+  margin-top:20px;
+  font-size:20px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.edit-input{
+  display:none;
+  margin-top:10px;
+  padding:8px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  width:80%;
+}
+
+p{
+  color:#666;
+  margin-top:5px;
+}
+
+.btn{
+  margin-top:15px;
+  padding:10px 15px;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+  background:#4f46e5;
+  color:#fff;
+  font-weight:bold;
+}
+
+input[type="file"]{
+  display:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="profile-card">
+
+  <!-- LOGOUT -->
+  <button class="logout" onclick="logout()">Chiqish</button>
+
+  <!-- AVATAR -->
+  <div class="main-wrapper">
+
+    <div class="main-wrapper-inside">
+      <img id="avatar" src="./img/indira2.jpg">
+    </div>
+
+    <div class="button" id="mainBtn">
+      <i class="material-icons">add</i>
+    </div>
+
+    <!-- UPLOAD -->
+    <div class="button-wrapper first">
+      <label class="button-inside first" for="avatarInput">
+        <i class="material-icons">image</i>
+      </label>
+      <input id="avatarInput" type="file" accept="image/*">
+    </div>
+
+    <!-- CHAT -->
+    <div class="button-wrapper second">
+      <div class="button-inside second">
+        <i class="material-icons">chat</i>
+      </div>
+    </div>
+
+    <!-- VIDEO -->
+    <div class="button-wrapper third">
+      <div class="button-inside third">
+        <i class="material-icons">videocam</i>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- NAME -->
+  <div class="name" id="nameText" onclick="editName()">Indira</div>
+  <input class="edit-input" id="nameInput" onblur="saveName()" type="text">
+
+  <p>sevgilisi bor😁 sevaman sani borlig'im bilan shuni bil Allohdan har doim sorayman birga qilsin deb Alloh taollo aytadi bitta bandani duosi qabul bolmaslikdan kora koinotni yoq bolib ketishi oson deydi duoyim qabul boladi inshaolloh <br>endi chiqib premium tugmasini bos</p>
+
+  <button class="btn">Follow</button>
+
+</div>
+
+<script>
+
+/* RADIAL MENU */
+let btn = document.querySelector('.button');
+let wrappers = document.querySelectorAll('.button-wrapper');
+
+btn.addEventListener('click', () => {
+  btn.classList.toggle('animation');
+  wrappers.forEach(w => w.classList.toggle('animation'));
+});
+
+/* AVATAR UPLOAD */
+const avatarInput = document.getElementById("avatarInput");
+const avatar = document.getElementById("avatar");
+
+avatarInput.addEventListener("change", function(){
+  const file = this.files[0];
+  if(!file) return;
+
+  const reader = new FileReader();
+
+  reader.onload = function(e){
+    avatar.src = e.target.result;
+    localStorage.setItem("avatar", e.target.result);
+  }
+
+  reader.readAsDataURL(file);
+});
+
+/* LOAD SAVED DATA */
+window.addEventListener("load", () => {
+  const img = localStorage.getItem("avatar");
+  if(img) avatar.src = img;
+
+  const name = localStorage.getItem("name");
+  if(name) document.getElementById("nameText").innerText = name;
+});
+
+/* NAME EDIT */
+function editName(){
+  let text = document.getElementById("nameText");
+  let input = document.getElementById("nameInput");
+
+  input.style.display = "block";
+  input.value = text.innerText;
+  text.style.display = "none";
+  input.focus();
+}
+
+function saveName(){
+  let text = document.getElementById("nameText");
+  let input = document.getElementById("nameInput");
+
+  text.innerText = input.value;
+  localStorage.setItem("name", input.value);
+
+  input.style.display = "none";
+  text.style.display = "block";
+}
+
+/* LOGOUT */
+/* LOGOUT */
+function logout(){
+  localStorage.clear();
+  window.location.href = "home.html";
+}
+
+</script>
+
+</body>
+</html>

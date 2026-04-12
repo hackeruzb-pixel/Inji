@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css?family=Varela+Round');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Varela Round', sans-serif;
+  background: #fff;
+  overflow-x: hidden;
+}
+
+/* HEADER */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background: #66a6ff;
+  z-index: 10;
+}
+
+/* HAMBURGER */
+.sidebarIconToggle {
+  position: absolute;
+  top: 18px;
+  left: 15px;
+  width: 25px;
+  height: 22px;
+  cursor: pointer;
+  z-index: 999;
+}
+
+.spinner {
+  height: 3px;
+  width: 100%;
+  background: white;
+  margin: 4px 0;
+  transition: 0.3s ease;
+}
+
+/* HIDE CHECKBOX */
+.openSidebarMenu {
+  display: none;
+}
+
+/* SIDEBAR */
+#sidebarMenu {
+  position: fixed;
+  top: 60px;
+  left: 0;
+  width: 250px;
+  height: 100%;
+  background: linear-gradient(180deg, #66a6ff, #89f7fe);
+  transform: translateX(-250px);
+  transition: 0.3s ease;
+  z-index: 9;
+}
+
+.sidebarMenuInner {
+  list-style: none;
+}
+
+.sidebarMenuInner li {
+  padding: 18px;
+  color: white;
+  font-weight: bold;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.sidebarMenuInner li a {
+  color: white;
+  text-decoration: none;
+}
+
+/* OPEN SIDEBAR */
+.openSidebarMenu:checked ~ #sidebarMenu {
+  transform: translateX(0);
+}
+
+/* HAMBURGER → X ANIMATION */
+.openSidebarMenu:checked ~ .header .part-1 {
+  transform: rotate(45deg);
+  margin-top: 8px;
+}
+
+.openSidebarMenu:checked ~ .header .horizontal {
+  opacity: 0;
+}
+
+.openSidebarMenu:checked ~ .header .part-2 {
+  transform: rotate(-45deg);
+  margin-top: -8px;
+}
+
+/* MAIN */
+.main {
+  margin-top: 60px;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mainInner div {
+  font-size: 3em;
+  font-weight: bold;
+}
+
+/* RESPONSIVE */
+@media screen and (max-width: 768px) {
+  #sidebarMenu {
+    width: 220px;
+    transform: translateX(-220px);
+  }
+
+  .mainInner div {
+    font-size: 1.5em;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  #sidebarMenu {
+    width: 200px;
+    transform: translateX(-200px);
+  }
+
+  .mainInner div {
+    font-size: 1.2em;
+  }
+}
+
+.sidebarIconToggle {
+  position: absolute;
+  top: 18px;
+  left: 15px;
+  width: 26px;
+  height: 22px;
+}
+
+.spinner {
+  height: 3px;
+  border-radius: 3px;
+  background: white;
+  transition: 0.3s ease;
+}
+
+/* X animatsiya clean */
+.openSidebarMenu:checked ~ .header .part-1 {
+  transform: rotate(45deg) translate(2px, 2px);
+}
+
+.openSidebarMenu:checked ~ .header .horizontal {
+  opacity: 0;
+}
+
+.openSidebarMenu:checked ~ .header .part-2 {
+  transform: rotate(-45deg) translate(2px, -2px);
+}
