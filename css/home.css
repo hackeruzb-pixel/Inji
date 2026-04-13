@@ -161,3 +161,56 @@ body {
 .openSidebarMenu:checked ~ .header .part-2 {
   transform: rotate(-45deg) translate(2px, -2px);
 }
+/* LOVE CARD */
+.loveCard{
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(12px);
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;
+  color: rgb(0, 0, 0);
+  max-width: 400px;
+  margin: auto;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  animation: fadeIn 1s ease;
+}
+
+.loveCard h1{
+  margin-bottom: 15px;
+}
+
+.loveCard p{
+  line-height: 1.7;
+  font-size: 16px;
+}
+
+/* BUTTON */
+.loveBtn{
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: white;
+  color: #ff6a88;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.loveBtn:hover{
+  background: #ff6a88;
+  color: white;
+  transform: scale(1.05);
+}
+
+/* ANIMATION */
+@keyframes fadeIn{
+  from{
+    opacity:0;
+    transform:translateY(20px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
